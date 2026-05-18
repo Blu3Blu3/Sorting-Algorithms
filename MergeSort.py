@@ -57,6 +57,8 @@ def merge_merge(arr1, arr2):
         else:
             ret.append(arr2[b])
             b += 1
+    # In all honesty, I'm not sure if each insertion is counted as an operation or the whole "merge" function is one operation...
+    # I'll just leave this implementation here for now.
     return [ret, len(ret)]
             
 # Run Merge Sort on an array and returns the sorted version, plus how many iterations it took.
