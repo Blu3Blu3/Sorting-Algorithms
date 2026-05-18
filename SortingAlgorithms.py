@@ -1,19 +1,27 @@
-# Selection Sort
+# Sorting Algorithms
 # Love yourself <3
 # Started: 5/7/2026
-# Finished: 5/7/2026
-# Validated: 5/7/2026
+# Finished: -----
+# Validated: -----
 # Last updated: 5/14/2026
-#   - Moved console logs to separate functions
-#   - Reworked random tests to be more concise
+#   - Created a new program to hold and individually test multiple sorting algorithms
 
 '''
-Selection sort works by splitting an array into a sorted part and unsorted part.
+Selection Sort
+Love yourself <3
+Started: 5/7/2026
+Finished: 5/7/2026
+Validated: 5/7/2026
+Last updated: 5/14/2026
+   - Moved console logs to separate functions
+   - Reworked random tests to be more concise
+
+Selection Sort works by splitting an array into a sorted part and unsorted part.
 It repeatedly searches the unsorted part for the minimum element, then appends it to the sorted part.
 Every iteration, it has to run through all the elements in the unsorted array.
 Therefore, it's O(n^2) in all cases.
 
-To make the selection sort algorithm:
+To make the Selection Sort algorithm:
 1. Have an outer loop iterate over all n elements in array arr.
 2. Have an inner loop iterate over all elements past the outer index (inclusive).
 3. Find the minimum element in the inner loop's subarray.
@@ -21,12 +29,8 @@ To make the selection sort algorithm:
 5. Loops repeat until the array is fully sorted.
 '''
 
-import random
-
-seed = random.seed
-
 # Run selection sort on an array and return the sorted version, plus how many iterations it took.
-#   - arr ([int]): An array of ints to be sorted.
+#   - arr (int[]): An array of ints to be sorted.
 def selection_sort(arr):
     # Make a copy because I'm not sure if arr is passed by reference...
     ret = arr.copy()
@@ -39,6 +43,65 @@ def selection_sort(arr):
                 ret[i] = temp
                 ops += 1
     return [ret, ops]
+
+'''
+Merge Sort
+Wooooo
+Started: 5/17/2026
+Finished: -----
+Validated: -----
+Last updated: 5/17/2026
+    - Started work on the functions
+
+Merge Sort works by bisecting an array into subarrays, then bisecting those, repeatedly, until they are
+one element long. From there, it undoes the splits by merging the subarrays together, picking elements
+to add to the "merged" array from either subarray, depending on which is next in the order. This repeats
+until the sorted version of the initial array emerges.
+
+To make the Merge Sort algorithm:
+1. Make a "split" function that cuts a given array in two, and returns the halves.
+    a. It's fine to have a half with one more element in it, it'll get worked out later.
+2. Make a "merge" function that takes two arrays and orders their elements in a new array.
+    a. Have two counters 'a' and 'b', one to go over each array given.
+    b. While both counters are < their array's length, compare arrA[a] and arrB[b], and append the lower
+       of the two to the return array (or higher if sorting in descending order).
+    c. Once done, return the merged array.
+3. Make a "merge_sort" function that recursively splits a given array into its parts, then merges them
+   back together.
+    a. If the array is two elements only, call split() on it, call merge() on the halves, and return.
+    b. Otherwise, call split(), then call merge_sort() on the halves. After this, have a merge() call to
+       merge the resulting subarrays.
+'''
+
+# Splits an array in two and returns the halves.
+#   - arr (int[]): The array to bisect.
+def merge_split(arr):
+    # Gotta love Python for making arrays easier to work with :)
+    split_index = (int) (len(arr)/2)
+    return [arr[:split_index], arr[split_index:]]
+
+# Merges two arrays into a sorted array that is then returned.
+#   - arr1 (int[]): The first array to pull elements from.
+#   - arr2 (int[]): The second array to pull elements from.
+def merge_merge(arr1, arr2):
+    a = 0
+    b = 0
+    ret = []
+    while (a < len(arr1)) or (b < len(arr2)):
+        if (arr1[a] <= arr2[b]):
+            ret.append(arr1[a])
+            a += 1
+        else:
+            ret.append(arr2[b])
+            b += 1
+
+#####################################################
+
+import random
+
+seed = random.seed
+
+
 
 # Make and return an array of "size" random ints.
 # Default is an array of 10 ints in the range 1-10.
